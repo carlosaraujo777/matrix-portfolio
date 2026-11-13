@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #0f0;
+  font-family: "Courier New", monospace;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* CHUVA — fixa no fundo, atrás de tudo */
+#matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* TERMINAL — por cima, fundo semi-transparente */
+.terminal {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  height: 100vh;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(0, 255, 0, 0.15);
+  border-right: 1px solid rgba(0, 255, 0, 0.15);
+  box-shadow: 0 0 40px rgba(0, 255, 0, 0.12);
+}
+
+.terminal-header {
+  background: rgba(0, 20, 0, 0.9);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #0f0;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.15);
+}
+
+.terminal-header .status {
+  color: #0f0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-shadow: 0 0 5px #0f0;
+}
+
+.terminal-body p {
+  margin-bottom: 6px;
+}
+
+.cmd-hint {
+  color: #0ff;
+}
+
+.prompt-line {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.prompt {
+  color: #0f0;
+  white-space: nowrap;
+}
+
+#terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #0f0;
+  font-family: inherit;
+  font-size: inherit;
+  text-shadow: inherit;
+  caret-color: #0f0;
+}
+
+/* Scrollbar */
+.terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 0, 0.2);
+  border-radius: 4px;
+}

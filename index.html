@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matrix OS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Chuva de código (fica atrás de tudo) -->
+  <canvas id="matrix-rain"></canvas>
+
+  <!-- Terminal (fica por cima) -->
+  <div class="terminal">
+    <div class="terminal-header">
+      <span>MATRIX OS v5.0.0 (c) 2026</span>
+      <span class="status">● online</span>
+    </div>
+    <div class="terminal-body" id="terminal-body">
+<p class="boas-vindas">Type <span class="cmd-hint">'help'</span> to see available commands.</p>
+      <p class="prompt-line">
+        <span class="prompt">root@matrix:~$</span>
+        <input type="text" id="terminal-input" autocomplete="off" autofocus />
+      </p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
