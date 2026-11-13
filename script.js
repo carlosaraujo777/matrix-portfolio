@@ -59,7 +59,7 @@ const comandos = {
   },
   about: () => {
     return `Carlos Alexandre, 21 anos, Agrocomputação (FATEC Cuiabá).
-Dev focado em dados + web. AuDHD, ansioso, mas não desisto.
+Dev focado em dados + web. 
 Lema: "Eu vou vencer, nem que seja um segundo de cada vez."`;
   },
   skills: () => {
