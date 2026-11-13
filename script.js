@@ -138,3 +138,48 @@ function adicionarLinha(texto, tipo = "resposta") {
 
   body.scrollTop = body.scrollHeight;
 }
+// ===== AUTOCOMPLETE COM TAB + HISTÓRICO COM SETAS =====
+let historico = [];
+let indiceHistorico = -1;
+
+input.addEventListener("keydown", (e) => {
+  // Se for TAB
+  if (e.key === "Tab") {
+    e.preventDefault(); // impede de sair do input
+    const valor = input.value.toLowerCase().trim();
+    if (!valor) return;
+
+    // Acha o primeiro comando que começa com o que foi digitado
+    const match = Object.keys(comandos).find((cmd) => cmd.startsWith(valor));
+    if (match) input.value = match;
+  }
+
+  // Se for SETA PRA CIMA
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (historico.length === 0) return;
+    if (indiceHistorico === -1) indiceHistorico = historico.length - 1;
+    else if (indiceHistorico > 0) indiceHistorico--;
+    input.value = historico[indiceHistorico];
+  }
+
+  // Se for SETA PRA BAIXO
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    if (historico.length === 0 || indiceHistorico === -1) return;
+    if (indiceHistorico < historico.length - 1) {
+      indiceHistorico++;
+      input.value = historico[indiceHistorico];
+    } else {
+      indiceHistorico = -1;
+      input.value = "";
+    }
+  }
+});
+
+// ===== SALVAR NO HISTÓRICO QUANDO APERTAR ENTER =====
+// (Precisamos modificar o listener do Enter que já existe)
+// Vai na parte do código que tem "input.addEventListener("keydown", (e) => { if (e.key !== "Enter") return;"
+// E adiciona logo depois do "input.value = "";":
+// historico.push(texto);
+// indiceHistorico = -1;
