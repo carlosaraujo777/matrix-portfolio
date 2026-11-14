@@ -145,7 +145,7 @@ body {
 }
 
 .pilula:hover {
-  transform: scale(1.2); /* aumenta de tamanho quando passa o mouse */
+  transform: scale(1.5); /* aumenta de tamanho quando passa o mouse */
 }
 
 .pilula.vermelha {
@@ -165,7 +165,7 @@ body {
   background: #000;
   color: #f00;
   font-family: monospace;
-  font-size: 2rem;
+  font-size: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

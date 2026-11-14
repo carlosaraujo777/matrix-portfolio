@@ -75,17 +75,17 @@ const comandos = {
   help: () => {
     return `Comandos disponíveis:
   help       → mostra esta lista
-  about      → quem sou eu
-  skills     → minhas tecnologias
+  about      → sobre mim
+  skills     → tech skills
   projects   → meus projetos
-  contact    → como me achar
-  sudo       → teste de permissão
-  matrix     → acelera a chuva por 5s
+  contact    → meus contatos
+  sudo       → tente a sorte 😏
+  matrix     → little easter egg
   clear      → limpa o terminal`;
   },
   about: () => {
     return `Carlos Alexandre, 21 anos, Agrocomputação (FATEC Cuiabá).
-Dev focado em dados + web. AuDHD, ansioso, mas não desisto.
+Dev focado em dados + web.
 Lema: "Eu vou vencer, nem que seja um segundo de cada vez."`;
   },
   skills: () => {
@@ -94,18 +94,18 @@ HTML, CSS, FastAPI, Streamlit, Chart.js, Power BI (DAX),
 Git/GitHub, Deploy (Vercel, Render, GitHub Pages).`;
   },
   projects: () => {
-    return `→ Seychelles (privado) — dashboard pessoal AuDHD
+    return `→ Seychelles (privado) — dashboard pessoal
 → AgroConnect — full stack FastAPI + SQLite
 → AgroIA — chat com Google Gemini
 → LogiAgro — marketplace de frete
 → AgroSim — simulador de margem agrícola
-→ Terminal Matrix — este aqui 😎
+→ Terminal Matrix — este aqui 🐇
 → Pipeline ETL Olist — automação Python
 → Dashboards Power BI — e-commerce + CONAB`;
   },
   contact: () => {
-    return `GitHub:   github.com/carlosaraujo777
-LinkedIn: linkedin.com/in/carlosaraujo777
+    return `GitHub:https://github.com/carlosaraujo777/Projetos_Carlos/tree/main
+Linkedin: https://www.linkedin.com/in/carlos-araujo-852b5b277/
 Email:    (carlinhox447@gmail.com)`;
   },
     sudo: () => {
