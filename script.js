@@ -103,7 +103,19 @@ Email:    (adiciona aqui teu email)`;
     });
     return null;
   },
+    whoami: () => {
+    return `Você é o Carlos Alexandre.
+21 anos, dev de dados e web, criador do Matrix OS.
+Sobrevivente do AuDHD, da ansiedade e da dismorfia.
+Status: Não desiste.`;
+  },
+  sudo: () => {
+    return `Acesso negado: nice try. 😏
+Aqui é o Matrix OS, não o teu servidor Linux.
+(Se quiser apagar o sistema, tenta o comando 'matrix' e vê o que acontece.)`;
+  },
 };
+
 
 input.addEventListener("keydown", (e) => {
   if (e.key !== "Enter") return;
@@ -182,4 +194,4 @@ input.addEventListener("keydown", (e) => {
 // Vai na parte do código que tem "input.addEventListener("keydown", (e) => { if (e.key !== "Enter") return;"
 // E adiciona logo depois do "input.value = "";":
 // historico.push(texto);
-// indiceHistorico = -1;
+// indiceHistorico = -1;'
