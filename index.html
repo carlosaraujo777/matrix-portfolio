@@ -11,13 +11,22 @@
   <canvas id="matrix-rain"></canvas>
 
   <!-- Terminal (fica por cima) -->
-  <div class="terminal">
+     <!-- TELA DAS PÍLULAS (Fica visível no início) -->
+  <div class="escolha-pilula" id="tela-pilulas">
+    <h2>Faça a sua escolha.</h2>
+    <div class="pilulas">
+      <button class="pilula vermelha" id="btn-vermelha"></button>
+      <button class="pilula azul" id="btn-azul"></button>
+    </div>
+  </div>
+   <!-- TERMINAL (Começa escondido) -->
+  <div class="terminal escondido" id="tela-terminal">
     <div class="terminal-header">
       <span>MATRIX OS v5.0.0 (c) 2026</span>
       <span class="status">● online</span>
     </div>
     <div class="terminal-body" id="terminal-body">
-<p class="boas-vindas">Type <span class="cmd-hint">'help'</span> to see available commands.</p>
+      <p class="boas-vindas">Type <span class="cmd-hint">'help'</span> to see available commands.</p>
       <p class="prompt-line">
         <span class="prompt">root@matrix:~$</span>
         <input type="text" id="terminal-input" autocomplete="off" autofocus />

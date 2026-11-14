@@ -107,3 +107,67 @@ body {
   background: rgba(0, 255, 0, 0.2);
   border-radius: 4px;
 }
+/* --- TELA DAS PÍLULAS --- */
+.escondido {
+  display: none !important;
+}
+
+.escolha-pilula {
+  position: relative;
+  z-index: 10;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6); /* escurece a chuva atrás */
+}
+
+.escolha-pilula h2 {
+  color: #0f0;
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px #0f0;
+}
+
+.pilulas {
+  display: flex;
+  gap: 30px;
+}
+
+.pilula {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pilula:hover {
+  transform: scale(1.2); /* aumenta de tamanho quando passa o mouse */
+}
+
+.pilula.vermelha {
+  background: #f00;
+  box-shadow: 0 0 20px #f00;
+}
+
+.pilula.azul {
+  background: #00f;
+  box-shadow: 0 0 20px #00f;
+}
+
+/* --- TELA AZUL (ERRO) --- */
+.tela-erro {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #000;
+  color: #f00;
+  font-family: monospace;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}

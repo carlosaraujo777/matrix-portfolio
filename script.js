@@ -1,3 +1,28 @@
+// ===== ESCOLHA DAS PÍLULAS =====
+const telaPilulas = document.getElementById("tela-pilulas");
+const telaTerminal = document.getElementById("tela-terminal");
+const btnVermelha = document.getElementById("btn-vermelha");
+const btnAzul = document.getElementById("btn-azul");
+
+// PÍLULA VERMELHA: entra no terminal
+btnVermelha.addEventListener("click", () => {
+  telaPilulas.classList.add("escondido"); // esconde as pílulas
+  telaTerminal.classList.remove("escondido"); // mostra o terminal
+  document.getElementById("terminal-input").focus(); // foca no input
+});
+
+// PÍLULA AZUL: tela de ERROR
+btnAzul.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <div class="tela-erro">
+      <h1>ERROR: Reality failed to load.</h1>
+    </div>
+  `;
+  // Dá umas piscadas de tela vermelha de fundo
+  setInterval(() => {
+    document.body.style.background = document.body.style.background === "red" ? "#000" : "red";
+  }, 200);
+});
 // ===== CHUVA DE CÓDIGO (Canvas) =====
 const canvas = document.getElementById("matrix-rain");
 const ctx = canvas.getContext("2d");
@@ -17,7 +42,7 @@ ajustarCanvas();
 window.addEventListener("resize", ajustarCanvas);
 
 const letras =
-  "アカサタナハマヤラワｱｲｳｴｵ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  "アカサタナハマヤラワｱｲｳｴｵ012345678910ABCDEFGHIJKLMNOPQRSTUVWXYZぁあぃぅぇぉかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんゔゕゖ";
 
 function desenharChuva() {
   ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
@@ -54,7 +79,6 @@ const comandos = {
   skills     → minhas tecnologias
   projects   → meus projetos
   contact    → como me achar
-  whoami     → minha identidade
   sudo       → teste de permissão
   matrix     → acelera a chuva por 5s
   clear      → limpa o terminal`;
@@ -82,18 +106,26 @@ Git/GitHub, Deploy (Vercel, Render, GitHub Pages).`;
   contact: () => {
     return `GitHub:   github.com/carlosaraujo777
 LinkedIn: linkedin.com/in/carlosaraujo777
-Email:    (adiciona aqui teu email)`;
+Email:    (carlinhox447@gmail.com)`;
   },
-  whoami: () => {
-    return `Você é o Carlos Alexandre.
-21 anos, dev de dados e web, criador do Matrix OS.
-Sobrevivente do AuDHD, da ansiedade e da dismorfia.
-Status: Não desiste.`;
-  },
-  sudo: () => {
-    return `Acesso negado: nice try. 😏
-Aqui é o Matrix OS, não o teu servidor Linux.
-(Se quiser apagar o sistema, tenta o comando 'matrix' e vê o que acontece.)`;
+    sudo: () => {
+    // Manda a primeira mensagem normal no terminal
+    adicionarLinha("root@matrix:~$ sudo init hack_kernel", "comando");
+    
+    // Cria uma sequência de mensagens com delay (setTimeout)
+    setTimeout(() => adicionarLinha("Iniciando override de kernel...", "resposta"), 500);
+    setTimeout(() => adicionarLinha("Bypass na firewall principal... [OK]", "resposta"), 1200);
+    setTimeout(() => adicionarLinha("Injetando payload no sistema... [OK]", "resposta"), 1900);
+    setTimeout(() => adicionarLinha("DESCRIPTOGRAFANDO SEGREDOS DO GOVERNO... [OK]", "comando"), 2600);
+    
+    // O plot twist
+    setTimeout(() => {
+      adicionarLinha("ERRO: Tentativa de invasão detectada pelo sistema.", "erro");
+      adicionarLinha("Acesso negado: nice try. 😏", "erro");
+    }, 3500);
+
+    // Retorna null pro sistema não imprimir a resposta padrão de uma vez
+    return null;
   },
   matrix: () => {
     clearInterval(chuvaInterval);
@@ -101,8 +133,8 @@ Aqui é o Matrix OS, não o teu servidor Linux.
     setTimeout(() => {
       clearInterval(chuvaInterval);
       chuvaInterval = setInterval(desenharChuva, velocidade);
-    }, 5000);
-    return "Wake up, Neo... 🐇 (chuva acelerada por 5s)";
+    }, 7000);
+    return "Wake up, Neo... 🐇🔴";
   },
   clear: () => {
     const paragrafos = body.querySelectorAll("p");
@@ -187,8 +219,8 @@ function adicionarLinha(texto, tipo = "resposta") {
   linhas.forEach((linha) => {
     const p = document.createElement("p");
     p.textContent = linha;
-    if (tipo === "comando") p.style.color = "#0ff";
-    if (tipo === "erro") p.style.color = "#f55";
+    if (tipo === "comando") p.style.color = "rgb(229, 255, 0)";
+    if (tipo === "erro") p.style.color = "rgb(255, 0, 0)";
     body.insertBefore(p, body.lastElementChild);
   });
 
