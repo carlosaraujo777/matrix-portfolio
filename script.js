@@ -42,7 +42,7 @@ function desenharChuva() {
 
 let chuvaInterval = setInterval(desenharChuva, velocidade);
 
-// ===== TERMINAL =====
+// ===== TERMINAL E COMANDOS =====
 const body = document.getElementById("terminal-body");
 const input = document.getElementById("terminal-input");
 
@@ -54,12 +54,14 @@ const comandos = {
   skills     → minhas tecnologias
   projects   → meus projetos
   contact    → como me achar
+  whoami     → minha identidade
+  sudo       → teste de permissão
   matrix     → acelera a chuva por 5s
   clear      → limpa o terminal`;
   },
   about: () => {
     return `Carlos Alexandre, 21 anos, Agrocomputação (FATEC Cuiabá).
-Dev focado em dados + web. 
+Dev focado em dados + web. AuDHD, ansioso, mas não desisto.
 Lema: "Eu vou vencer, nem que seja um segundo de cada vez."`;
   },
   skills: () => {
@@ -82,6 +84,17 @@ Git/GitHub, Deploy (Vercel, Render, GitHub Pages).`;
 LinkedIn: linkedin.com/in/carlosaraujo777
 Email:    (adiciona aqui teu email)`;
   },
+  whoami: () => {
+    return `Você é o Carlos Alexandre.
+21 anos, dev de dados e web, criador do Matrix OS.
+Sobrevivente do AuDHD, da ansiedade e da dismorfia.
+Status: Não desiste.`;
+  },
+  sudo: () => {
+    return `Acesso negado: nice try. 😏
+Aqui é o Matrix OS, não o teu servidor Linux.
+(Se quiser apagar o sistema, tenta o comando 'matrix' e vê o que acontece.)`;
+  },
   matrix: () => {
     clearInterval(chuvaInterval);
     chuvaInterval = setInterval(desenharChuva, 10);
@@ -103,40 +116,71 @@ Email:    (adiciona aqui teu email)`;
     });
     return null;
   },
-    whoami: () => {
-    return `Você é o Carlos Alexandre.
-21 anos, dev de dados e web, criador do Matrix OS.
-Sobrevivente do AuDHD, da ansiedade e da dismorfia.
-Status: Não desiste.`;
-  },
-  sudo: () => {
-    return `Acesso negado: nice try. 😏
-Aqui é o Matrix OS, não o teu servidor Linux.
-(Se quiser apagar o sistema, tenta o comando 'matrix' e vê o que acontece.)`;
-  },
 };
 
+// ===== HISTÓRICO E AUTOCOMPLETE =====
+let historico = [];
+let indiceHistorico = -1;
 
 input.addEventListener("keydown", (e) => {
-  if (e.key !== "Enter") return;
+  // TAB (Autocomplete)
+  if (e.key === "Tab") {
+    e.preventDefault();
+    const valor = input.value.toLowerCase().trim();
+    if (!valor) return;
+    const match = Object.keys(comandos).find((cmd) => cmd.startsWith(valor));
+    if (match) input.value = match;
+    return;
+  }
 
-  const texto = input.value.trim();
-  input.value = "";
+  // SETA PRA CIMA (Histórico)
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (historico.length === 0) return;
+    if (indiceHistorico === -1) indiceHistorico = historico.length - 1;
+    else if (indiceHistorico > 0) indiceHistorico--;
+    input.value = historico[indiceHistorico];
+    return;
+  }
 
-  if (texto === "") return;
+  // SETA PRA BAIXO (Histórico)
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    if (historico.length === 0 || indiceHistorico === -1) return;
+    if (indiceHistorico < historico.length - 1) {
+      indiceHistorico++;
+      input.value = historico[indiceHistorico];
+    } else {
+      indiceHistorico = -1;
+      input.value = "";
+    }
+    return;
+  }
 
-  adicionarLinha(`root@matrix:~$ ${texto}`, "comando");
+  // ENTER (Executar comando)
+  if (e.key === "Enter") {
+    const texto = input.value.trim();
+    input.value = "";
 
-  const cmd = comandos[texto.toLowerCase()];
+    if (texto === "") return;
 
-  if (cmd) {
-    const resposta = cmd();
-    if (resposta) adicionarLinha(resposta, "resposta");
-  } else {
-    adicionarLinha(`command not found: ${texto}`, "erro");
+    historico.push(texto);
+    indiceHistorico = -1;
+
+    adicionarLinha(`root@matrix:~$ ${texto}`, "comando");
+
+    const cmd = comandos[texto.toLowerCase()];
+
+    if (cmd) {
+      const resposta = cmd();
+      if (resposta) adicionarLinha(resposta, "resposta");
+    } else {
+      adicionarLinha(`command not found: ${texto}`, "erro");
+    }
   }
 });
 
+// ===== FUNÇÃO DE ESCREVER NO TERMINAL =====
 function adicionarLinha(texto, tipo = "resposta") {
   const linhas = texto.split("\n");
 
@@ -150,48 +194,3 @@ function adicionarLinha(texto, tipo = "resposta") {
 
   body.scrollTop = body.scrollHeight;
 }
-// ===== AUTOCOMPLETE COM TAB + HISTÓRICO COM SETAS =====
-let historico = [];
-let indiceHistorico = -1;
-
-input.addEventListener("keydown", (e) => {
-  // Se for TAB
-  if (e.key === "Tab") {
-    e.preventDefault(); // impede de sair do input
-    const valor = input.value.toLowerCase().trim();
-    if (!valor) return;
-
-    // Acha o primeiro comando que começa com o que foi digitado
-    const match = Object.keys(comandos).find((cmd) => cmd.startsWith(valor));
-    if (match) input.value = match;
-  }
-
-  // Se for SETA PRA CIMA
-  if (e.key === "ArrowUp") {
-    e.preventDefault();
-    if (historico.length === 0) return;
-    if (indiceHistorico === -1) indiceHistorico = historico.length - 1;
-    else if (indiceHistorico > 0) indiceHistorico--;
-    input.value = historico[indiceHistorico];
-  }
-
-  // Se for SETA PRA BAIXO
-  if (e.key === "ArrowDown") {
-    e.preventDefault();
-    if (historico.length === 0 || indiceHistorico === -1) return;
-    if (indiceHistorico < historico.length - 1) {
-      indiceHistorico++;
-      input.value = historico[indiceHistorico];
-    } else {
-      indiceHistorico = -1;
-      input.value = "";
-    }
-  }
-});
-
-// ===== SALVAR NO HISTÓRICO QUANDO APERTAR ENTER =====
-// (Precisamos modificar o listener do Enter que já existe)
-// Vai na parte do código que tem "input.addEventListener("keydown", (e) => { if (e.key !== "Enter") return;"
-// E adiciona logo depois do "input.value = "";":
-// historico.push(texto);
-// indiceHistorico = -1;'
