@@ -226,3 +226,27 @@ function adicionarLinha(texto, tipo = "resposta") {
 
   body.scrollTop = body.scrollHeight;
 }
+// ===== EFEITO PARALLAX 3D NO TERMINAL E PÍLULAS =====
+document.addEventListener("mousemove", (e) => {
+  // Pega a posição do mouse no centro da tela (-1 a 1)
+  const x = (e.clientX / window.innerWidth - 0.5) * 2;
+  const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+  // Pega os elementos
+  const telaTerminal = document.getElementById("tela-terminal");
+
+  // Função que aplica a rotação
+  const aplicarEfeito = (elemento) => {
+    // Se o elemento existe e NÃO está escondido
+    if (elemento && !elemento.classList.contains("escondido")) {
+      elemento.style.transform = `
+        rotateX(${y * -4}deg) 
+        rotateY(${x * 4}deg) 
+        translateZ(20px)
+      `;
+    }
+  };
+
+  // Aplica nas duas telas (a que estiver visível vai se mexer)
+  aplicarEfeito(telaTerminal);
+});

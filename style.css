@@ -171,3 +171,14 @@ body {
   justify-content: center;
   z-index: 999;
 }
+/* --- PREPARAÇÃO PARA O PARALLAX --- */
+/* O body precisa de perspectiva pra dar o efeito 3D */
+body {
+  perspective: 1000px; 
+}
+
+/* Os containers que vão se mover */
+.escolha-pilula, .terminal {
+  transition: transform 0.1s ease-out; /* Suaviza o movimento */
+  transform-style: preserve-3d; /* Mantém o 3D */
+}
